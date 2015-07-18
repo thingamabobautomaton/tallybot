@@ -14,7 +14,7 @@ router.post('/yesman',function(req,res) {
 
     return {
       text: 'Good point, ' + hook.user_name,
-      username: 'Bot'
+      username: 'Tallybot'
     };
 
   });
