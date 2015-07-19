@@ -3,7 +3,8 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var slack = require('node-slack');
+var Slack = require('node-slack');
+var slack = new Slack('https://hooks.slack.com/services/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');
 
 var routes = require('./routes/index');
 
@@ -51,6 +52,21 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+/* POST to yesman */
+app.post('/yesman',function(req,res) {
+  var reply = slack.respond(req.body,function(hook) {
+
+    return {
+      text: 'Good point, ' + hook.user_name,
+      username: 'Tallybot'
+    };
+
+  });
+
+  res.json(reply);
+
 });
 
 
